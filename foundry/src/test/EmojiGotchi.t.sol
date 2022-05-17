@@ -4,7 +4,13 @@ pragma solidity 0.8.10;
 import "ds-test/test.sol";
 import "../EmojiGotchi.sol";
 
+interface CheatCodes {
+    function warp(uint256) external;
+}
+
 contract EmojiGotchiTest is DSTest {
+    CheatCodes constant cheats = CheatCodes(HEVM_ADDRESS);
+
     EmojiGotchi public eg;
 
     // assign contract
@@ -104,9 +110,36 @@ contract EmojiGotchiTest is DSTest {
     }
 
     // image change
+
     // check upkeep
+
+    function testCheckUpKeep() public {
+        bytes memory data = "";
+        bool upKeepNeeded = false;
+
+        (upKeepNeeded, ) = eg.checkUpkeep(data);
+        assertTrue(upKeepNeeded == false);
+        // warp time forward 100s
+        cheats.warp(block.timestamp + 100);
+        (upKeepNeeded, ) = eg.checkUpkeep(data);
+        assertTrue(upKeepNeeded == true);
+    }
+
     // perform upkeep
-    function testExample() public {
-        assertTrue(true);
+    function testPerformUpkeep() public {
+        bytes memory data = "";
+
+        // warp time forward 100s
+        cheats.warp(block.timestamp + 100);
+
+        // upkeep is the same as pass time, but its done from the keeper
+        eg.performUpkeep(data);
+
+        (uint256 happiness, uint256 hunger, uint256 enrichment, , ) = eg
+            .gotchiStats(0);
+
+        assertEq(hunger, 90);
+        assertEq(enrichment, 90);
+        assertEq(happiness, (90 + 90) / 2);
     }
 }
