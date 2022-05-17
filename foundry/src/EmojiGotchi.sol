@@ -34,6 +34,15 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
         string imageUri;
     }
 
+    event EmojiUpdated(
+        uint256 happiness,
+        uint256 hunger,
+        uint256 enrichment,
+        uint256 lastChecked,
+        string imageUri,
+        uint256 gotchiIndex
+    );
+
     // owner addresses to gotchi token id
     mapping(address => uint256) public gotchiHolders;
     // gotchi token id to attributes
@@ -161,6 +170,7 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
             2;
 
         updateURI(tokenId);
+        emitUpdate(tokenId);
     }
 
     function updateURI(uint256 tokenId) private {
@@ -201,6 +211,7 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
 
         // update the emoji, maybe it changed
         updateURI(tokenId);
+        emitUpdate(tokenId);
     }
 
     function play() public {
@@ -218,6 +229,7 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
 
         // update the emoji, maybe it changed
         updateURI(tokenId);
+        emitUpdate(tokenId);
     }
 
     // KeeperCompatibleInterface
@@ -250,8 +262,19 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
 
         if (upkeepNeeded) {
             // TODO: should loop all NFT-s and passTime() on them
-            passTime(0);
             gotchiHolderAttributes[0].lastChecked = block.timestamp;
+            passTime(0);
         }
+    }
+
+    function emitUpdate(uint256 tokenId) internal {
+        emit EmojiUpdated(
+            gotchiHolderAttributes[tokenId].happiness,
+            gotchiHolderAttributes[tokenId].hunger,
+            gotchiHolderAttributes[tokenId].enrichment,
+            gotchiHolderAttributes[tokenId].lastChecked,
+            gotchiHolderAttributes[tokenId].imageUri,
+            tokenId
+        );
     }
 }
