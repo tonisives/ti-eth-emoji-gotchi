@@ -93,6 +93,26 @@ contract EmojiGotchiTest is DSTest {
         assertEq(happiness, 95);
     }
 
+    function testFeedFromZero() public {
+        for (int256 i = 0; i < 10; i++) {
+            eg.passTime(0);
+        }
+
+        (, uint256 hunger, , , ) = eg.myGotchi();
+        string memory hungerString = Strings.toString(hunger);
+        emit log(hungerString);
+        assertEq(hunger, 0);
+
+        // // test that feeding increases hunger, enrichment, happiness back to 100
+        eg.feed();
+
+        (uint256 happinessNew, uint256 hungerNew, , , ) = eg.myGotchi();
+
+        // when time passes, we want to decrease hunger and enrichment
+        assertEq(hungerNew, 10);
+        assertEq(happinessNew, 5);
+    }
+
     // play
 
     function testPlay() public {

@@ -1,2 +1,23 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import WalletConnect from '$lib/WalletConnect.svelte';
+	import EmojiGotchi from '../lib/EmojiGotchi.svelte';
+
+	import EmojiGotchiAbi from '../contracts/EmojiGotchi.json';
+	const contractAddr = '0x403132470c0b9aed3c1736f81d653f371057c231';
+
+	export let web3Props = {
+		provider: null,
+		signer: null,
+		account: null,
+		chainId: null,
+		contract: null
+	};
+</script>
+
+<h1>My EmojiGotchi</h1>
+
+{#if !web3Props.account}
+	<WalletConnect bind:web3Props {contractAddr} contractAbi={EmojiGotchiAbi} />
+{:else}
+	<EmojiGotchi bind:web3Props />
+{/if}
