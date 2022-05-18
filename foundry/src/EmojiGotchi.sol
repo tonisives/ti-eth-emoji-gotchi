@@ -48,7 +48,9 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
     // gotchi token id to attributes
     mapping(uint256 => GotchiAttributes) public gotchiHolderAttributes;
 
-    constructor() ERC721("EmojiGotchi", "EMG") {}
+    constructor() ERC721("EmojiGotchi", "EMG") {
+        safeMint(msg.sender);
+    }
 
     function safeMint(address to) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
