@@ -37,11 +37,10 @@ You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
-
 ```
 Deployer: 0x2e4e72edc83053f8ade4a525191ba7aba086c067
-Deployed to: 0x403132470c0b9aed3c1736f81d653f371057c231
-Transaction hash: 0x1900430046f4302d9df022f81918e4457965ce65c9d5b10c66ff360b844abd35
+Deployed to: 0x7621369d0433c8d7baaff647e5551472c0bfacc7
+Transaction hash: 0x7812be10a4a52baca76860f23e715ff7e4ac7699c610052bf1862bb43ce0b674
 ```
 
 upkeep: https://keepers.chain.link/mumbai/1425

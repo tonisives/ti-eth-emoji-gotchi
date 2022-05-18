@@ -3,7 +3,7 @@
 	import EmojiGotchi from '../lib/EmojiGotchi.svelte';
 
 	import EmojiGotchiAbi from '../contracts/EmojiGotchi.json';
-	const contractAddr = '0x403132470c0b9aed3c1736f81d653f371057c231';
+	const contractAddr = '0x7621369d0433c8d7baaff647e5551472c0bfacc7';
 
 	export let web3Props = {
 		provider: null,

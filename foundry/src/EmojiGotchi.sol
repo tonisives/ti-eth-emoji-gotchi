@@ -201,10 +201,7 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
     function feed() public {
         uint256 tokenId = gotchiHolders[msg.sender];
         // increase hunger by 10
-        gotchiHolderAttributes[tokenId].hunger += 10;
-        if (gotchiHolderAttributes[tokenId].hunger > 100) {
-            gotchiHolderAttributes[tokenId].hunger = 100;
-        }
+        gotchiHolderAttributes[tokenId].hunger = 100;
 
         gotchiHolderAttributes[tokenId].happiness =
             (gotchiHolderAttributes[tokenId].hunger +
@@ -219,10 +216,7 @@ contract EmojiGotchi is ERC721, ERC721URIStorage, Ownable {
     function play() public {
         uint256 tokenId = gotchiHolders[msg.sender];
         // increase hunger by 10
-        gotchiHolderAttributes[tokenId].enrichment += 10;
-        if (gotchiHolderAttributes[tokenId].enrichment > 100) {
-            gotchiHolderAttributes[tokenId].enrichment = 100;
-        }
+        gotchiHolderAttributes[tokenId].enrichment = 100;
 
         gotchiHolderAttributes[tokenId].happiness =
             (gotchiHolderAttributes[tokenId].hunger +

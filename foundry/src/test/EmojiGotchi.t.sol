@@ -109,8 +109,8 @@ contract EmojiGotchiTest is DSTest {
         (uint256 happinessNew, uint256 hungerNew, , , ) = eg.myGotchi();
 
         // when time passes, we want to decrease hunger and enrichment
-        assertEq(hungerNew, 10);
-        assertEq(happinessNew, 5);
+        assertEq(hungerNew, 100);
+        assertEq(happinessNew, 100);
     }
 
     // play
