@@ -49,6 +49,9 @@ function App() {
             Add Polygon Mumbai testnet{" "}
             <a href="https://mumbai.polygonscan.com/">here</a>
           </Box>
+          <Box>
+            Mumbai faucet <a href="https://faucet.polygon.technology/">here</a>
+          </Box>
         </Stack>
       )}
     </Stack>
