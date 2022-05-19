@@ -16,3 +16,4 @@ artifacts
 cache/
 out/
 solidity/lib
+.vscode
